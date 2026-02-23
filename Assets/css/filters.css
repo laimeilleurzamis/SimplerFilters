@@ -1,0 +1,95 @@
+/* --- 0. LAYOUT --- */
+.filter-box-component {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.simpler-filter-wrapper { 
+    display: flex; gap: 10px; align-items: center;
+}
+
+.simpler-text-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1e429f;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-right: 5px;
+}
+
+/* --- 1. BUTTONS --- */
+.global-create-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 38px; padding: 0 16px; background-color: #3b82f6;
+    color: #ffffff !important; border: 1px solid #3b82f6;
+    border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+    text-decoration: none !important; transition: all 0.2s ease;
+}
+.global-create-btn i { margin-right: 8px; }
+
+.apply-filters-btn-toggle {
+    height: 38px; padding: 0 16px; background: #3b82f6; color: #fff;
+    border: 1px solid #3b82f6; border-radius: 6px; cursor: pointer;
+    font-weight: 600; font-size: 0.9rem;
+}
+.apply-filters-btn-toggle i { margin-right: 8px; }
+
+.reset-filters-btn {
+    height: 38px; padding: 0 16px; background: #ef4444;
+    color: #ffffff !important; border: 1px solid #ef4444;
+    border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600;
+}
+
+/* --- 2. DROPDOWNS --- */
+.simpler-dropdown { position: relative; min-width: 170px; }
+.simpler-dropdown-toggle {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 38px; padding: 0 12px; background: #fff;
+    border: 1px solid #dbeafe; border-radius: 6px; cursor: pointer;
+    font-size: 0.85rem; color: #1e429f;
+}
+.simpler-dropdown-toggle i:first-child { margin-right: 8px; }
+
+.simpler-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0; z-index: 1000;
+    margin-top: 6px; background: #f4f9ff; border: 1px solid #dbeafe;
+    border-radius: 8px; padding: 5px; min-width: 220px; list-style: none;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.simpler-dropdown.active .simpler-dropdown-menu { display: block; }
+
+.simpler-dropdown-menu li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; cursor: pointer; border-radius: 6px;
+    color: #1e429f; font-size: 0.9rem;
+}
+
+/* --- 3. COLUMN SELECTOR --- */
+.apply-container { position: relative; }
+.column-selector-dropdown {
+    display: none; 
+    position: absolute; 
+    top: 100%;
+    right: 0;
+    width: 250px; 
+    background: #ffffff; 
+    border: 1px solid #dbeafe;
+    border-radius: 8px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 2000; 
+    padding: 10px;
+    margin-top: 6px;
+}
+.column-selector-dropdown.active { display: block; }
+.column-selector-header { font-size: 0.8rem; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
+.column-list { list-style: none; margin: 0 0 10px 0; padding: 0; max-height: 200px; overflow-y: auto; }
+.column-list li { display: flex; justify-content: space-between; padding: 8px; cursor: pointer; border-radius: 4px; color: #1e429f; }
+.column-list li:hover { background: #f1f5f9; }
+
+.confirm-apply-btn { width: 100%; padding: 10px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+.chk-icon { margin-left: 10px; color: #94a3b8; }
+li[data-checked="true"] .chk-icon { color: #2563eb; }
+.priority-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
