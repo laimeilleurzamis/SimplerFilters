@@ -57,13 +57,25 @@
             }
         });
 
-        /* Reset all to status:open */
+        /* Reset all to status:open&status:closed */
         document.addEventListener('click', function(e) {
             if (e.target.closest('.reset-filters-btn')) {
                 const baseUrl = document.querySelector('.simpler-filter-wrapper').getAttribute('data-base-url');
-                window.location.href = baseUrl + '&search=status:open&status:closed';
+                let query = 'status:open&status:closed';
+                window.location.href = baseUrl + '&search=' + encodeURIComponent(query);
             }
         });
+
+        /* set all to status:open&status:closed at page loading if no filters are selected */
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchParam = urlParams.get('search');
+        const controller = urlParams.get('controller');
+        const taskIdToOpen = urlParams.get('open_task_id');
+        if (controller === 'BoardViewController' && !taskIdToOpen && (!searchParam || !searchParam.includes('status:open') || !searchParam.includes('status:closed'))) {
+            const baseUrl = document.querySelector('.simpler-filter-wrapper').getAttribute('data-base-url');
+            let query = 'status:open&status:closed';
+            window.location.href = baseUrl + '&search=' + encodeURIComponent(query);
+        }
     }
 
     function closeAll() {
