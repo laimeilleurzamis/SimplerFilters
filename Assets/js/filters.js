@@ -41,7 +41,6 @@
         document.addEventListener('click', function(e) {
             if (e.target.closest('.confirm-apply-btn')) {
                 const wrapper = document.querySelector('.simpler-filter-wrapper');
-                const baseUrl = wrapper.getAttribute('data-base-url');
                 
                 let query = 'status:open&status:closed';
                 
@@ -53,16 +52,15 @@
                 const selectedColumns = wrapper.querySelectorAll('.column-list li[data-checked="true"]');
                 selectedColumns.forEach(el => query += ' ' + el.getAttribute('data-column-value'));
 
-                window.location.href = baseUrl + '&search=' + encodeURIComponent(query);
+                applySearch(query);
             }
         });
 
         /* Reset all to status:open&status:closed */
         document.addEventListener('click', function(e) {
             if (e.target.closest('.reset-filters-btn')) {
-                const baseUrl = document.querySelector('.simpler-filter-wrapper').getAttribute('data-base-url');
                 let query = 'status:open&status:closed';
-                window.location.href = baseUrl + '&search=' + encodeURIComponent(query);
+                applySearch(query);
             }
         });
 
@@ -71,11 +69,20 @@
         const searchParam = urlParams.get('search');
         const controller = urlParams.get('controller');
         const taskIdToOpen = urlParams.get('open_task_id');
-        if (controller === 'BoardViewController' && !taskIdToOpen && (!searchParam || !searchParam.includes('status:open') || !searchParam.includes('status:closed'))) {
-            const baseUrl = document.querySelector('.simpler-filter-wrapper').getAttribute('data-base-url');
-            let query = 'status:open&status:closed';
-            window.location.href = baseUrl + '&search=' + encodeURIComponent(query);
+        const filterWrapper = document.querySelector('.simpler-filter-wrapper');
+        if (filterWrapper && !taskIdToOpen && (!searchParam || !searchParam.includes('status:open') || !searchParam.includes('status:closed'))) {
+            applySearch('status:open status:closed');
         }
+    }
+
+    function applySearch(query) {
+        const wrapper = document.querySelector('.simpler-filter-wrapper');
+        const baseUrl = wrapper.getAttribute('data-base-url');
+        
+        const url = new URL(baseUrl, window.location.origin);
+        url.searchParams.set('search', query);
+        
+        window.location.href = url.toString();
     }
 
     function closeAll() {
