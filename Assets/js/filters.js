@@ -69,8 +69,10 @@
         const searchParam = urlParams.get('search');
         const controller = urlParams.get('controller');
         const taskIdToOpen = urlParams.get('open_task_id');
-        const filterWrapper = document.querySelector('.simpler-filter-wrapper');
-        if (filterWrapper && !taskIdToOpen && (!searchParam || !searchParam.includes('status:open') || !searchParam.includes('status:closed'))) {
+        const pathName = window.location.pathname;
+        const isBoardView = (controller === 'BoardViewController') || pathName.includes('/board/');
+
+        if (isBoardView && !taskIdToOpen && (!searchParam || !searchParam.includes('status:open') || !searchParam.includes('status:closed'))) {
             applySearch('status:open status:closed');
         }
     }
